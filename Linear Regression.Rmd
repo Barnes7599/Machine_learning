@@ -1,0 +1,64 @@
+---
+title: "Linear Regression"
+date: "5/18/2019"
+---
+###Pull in the data set
+```{r df}
+df <- read.csv("student-mat.csv", sep = ';')
+```
+###Get to know your data
+```{r}
+head(df)
+```
+```{r}
+summary(df)
+```
+###Is there any null values
+```{r}
+any(is.na(df))
+```
+###Structure 
+Make sure the factors with appropriate levels where imported.
+```{r}
+str(df)
+```
+
+Identify what columns have numeric values
+
+```{r}
+num.cols <- sapply(df, is.numeric)
+```
+###Coorelation
+Build a correlation table 
+```{r}
+cor.data <- cor(df[,num.cols])
+```
+View the correlation table
+```{r}
+cor.data
+```
+As you can see it is pretty difficult to see what is happening, so lets visualize it will coorplot.
+```{r}
+library(corrplot)
+corrplot(cor.data, method = "color")
+```
+
+You can also use corrgram for a different perspective.
+
+```{r}
+library(corrgram)
+corrgram(df)
+```
+```{r}
+corrgram(df, order = TRUE, lower.panel = panel.shade, upper.panel = panel.pie, text.panel = panel.txt)
+```
+```{r}
+library(ggplot2)
+```
+Lets look at a histogram of the 3rd quarter test scores (G3) after all this is what we are trying to perdict
+```{r}
+ggplot(df, aes(G3)) +
+    geom_histogram(bins = 20, alpha = .5, fill = "blue")
+```
+
+
