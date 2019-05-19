@@ -81,7 +81,7 @@ R2
 
 differences <- results %>% 
     mutate(differences = actual - predicted) %>% 
-    summarise(mean(differences))
+    summarise(sd(differences))
 
 differences
 
