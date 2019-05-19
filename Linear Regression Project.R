@@ -65,7 +65,7 @@ summary(temp.model)
 
 bike$hour <- sapply(bike$hour, as.numeric)
 
-# Finally build a model 
+# Finally build a model with all the variables
 
 model_bike <- lm(count ~ . -casual - registered - datetime - atemp, bike)
 summary(model_bike)
