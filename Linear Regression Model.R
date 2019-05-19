@@ -70,6 +70,7 @@ mse <-  mean( (results$actual - results$predicted)^2)
 mse
 #print square root of mse
 mse^0.5
+#When a given method yields a small training MSE but a large test MSE, we are said to be overfitting the data. Overfitting refers specifically to the case in which a less flexible model would have yielded a smaller test MSE.
 
 ######
 SSE <- sum((results$predicted - results$actual)^2)
