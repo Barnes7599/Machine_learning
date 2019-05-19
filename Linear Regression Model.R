@@ -79,6 +79,9 @@ R2 <- 1 - SSE/SST
 #print R2
 R2
 
-results
+differences <- results %>% 
+    mutate(differences = actual - predicted) %>% 
+    summarise(mean(differences))
 
+differences
 
