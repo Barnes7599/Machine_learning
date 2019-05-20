@@ -1,3 +1,13 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ##Linear Regression Model 
 ###(Bikeshare Challenge)
 
@@ -48,10 +58,12 @@ ggplot(bike, aes(temp, count)) +
     theme_clean()
 
 ```
+
 In order to vizualize Need to turn datetime into POSIXct data field
 ```{r}
 bike$datetime <- as.POSIXct(bike$datetime)
 ```
+
 count vs datetime
 ```{r}
 ggplot(bike, aes(datetime, count)) +
@@ -60,20 +72,24 @@ ggplot(bike, aes(datetime, count)) +
     labs(x = "Date", y = "Number of bike rentals", title = "Rentals vs Date") +
     theme_clean()
 ```
+
 Coorelation between number of bikes rented and the temperature 
 ```{r}
 cor(bike[,c("temp","count")])
 ```
+
 Expolore seasonality with a boxplot
 ```{r}
 ggplot(bike, aes(season, count)) +
     geom_boxplot(aes(color = season)) +
     theme_clean()
 ```
+
 Add an hour column 
 ```{r}
 bike$hour <- sapply(bike$datetime, function(x){format(x,"%H")})
 ```
+
 Segment data into weekday and weekend
 ```{r}
 workday <- bike %>% 
@@ -81,6 +97,7 @@ workday <- bike %>%
 nonworkday <- bike %>% 
     filter(workingday == 0)
 ```
+
 Visulaize weekday
 ```{r}
 ggplot(workday, aes(hour, count)) +
@@ -100,6 +117,7 @@ ggplot(nonworkday, aes(hour, count)) +
     labs(title = "Weekend; Rentals by Hour") +
     theme_clean()
 ```
+
 #####Building the Model with just temperature as an attribute
 ```{r}
 temp.model <- lm(formula = count ~ temp, data = bike )
@@ -132,6 +150,7 @@ Convert hour to a numeric value
 ```{r}
 bike$hour <- sapply(bike$hour, as.numeric)
 ```
+
 Model 
 ```{r}
 model_bike <- lm(count ~ . -casual - registered - datetime - atemp, bike)

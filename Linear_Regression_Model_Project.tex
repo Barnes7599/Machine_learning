@@ -120,6 +120,20 @@
     \date{}
     \predate{}\postdate{}
   
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 
 \begin{document}
 
@@ -135,15 +149,64 @@ test set, using only information available prior to the rental period.
 
 \paragraph{Libraries}\label{libraries}
 
-library(tidyverse)
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
 
-library(ggthemes)
+\begin{verbatim}
+## -- Attaching packages --------------------------------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
 
-library(lubridate)
+\begin{verbatim}
+## v ggplot2 3.1.0       v purrr   0.3.1  
+## v tibble  2.1.1       v dplyr   0.8.0.1
+## v tidyr   0.8.3       v stringr 1.4.0  
+## v readr   1.3.1       v forcats 0.4.0
+\end{verbatim}
 
-library(knitr)
+\begin{verbatim}
+## -- Conflicts ------------------------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
 
-library(kableExtra)
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     date
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(knitr)}
+\KeywordTok{library}\NormalTok{(kableExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'kableExtra'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+\end{verbatim}
 
 \paragraph{Data}\label{data}
 
@@ -162,12 +225,339 @@ Data can be downloaded at
 \begin{Highlighting}[]
 \NormalTok{headbike <-}\StringTok{ }\KeywordTok{head}\NormalTok{(bike)}
 \KeywordTok{kable}\NormalTok{(headbike) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{    }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \StringTok{"striped"}\NormalTok{, }\DataTypeTok{full_width =}\NormalTok{ F)}
+\StringTok{    }\KeywordTok{kable_styling}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|r|r|r|r|r|r|r|r|r|r|r}
+\hline
+datetime & season & holiday & workingday & weather & temp & atemp & humidity & windspeed & casual & registered & count\\
+\hline
+2011-01-01 00:00:00 & 1 & 0 & 0 & 1 & 9.84 & 14.395 & 81 & 0.0000 & 3 & 13 & 16\\
+\hline
+2011-01-01 01:00:00 & 1 & 0 & 0 & 1 & 9.02 & 13.635 & 80 & 0.0000 & 8 & 32 & 40\\
+\hline
+2011-01-01 02:00:00 & 1 & 0 & 0 & 1 & 9.02 & 13.635 & 80 & 0.0000 & 5 & 27 & 32\\
+\hline
+2011-01-01 03:00:00 & 1 & 0 & 0 & 1 & 9.84 & 14.395 & 75 & 0.0000 & 3 & 10 & 13\\
+\hline
+2011-01-01 04:00:00 & 1 & 0 & 0 & 1 & 9.84 & 14.395 & 75 & 0.0000 & 0 & 1 & 1\\
+\hline
+2011-01-01 05:00:00 & 1 & 0 & 0 & 2 & 9.84 & 12.880 & 75 & 6.0032 & 0 & 1 & 1\\
+\hline
+\end{tabular}
+\end{table}
+
+\subparagraph{Check the structure of
+bike}\label{check-the-structure-of-bike}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(bike)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Error in kable(headbike) %>% kable_styling(bootstrap_options = "striped", : could not find function "%>%"
+## 'data.frame':    10886 obs. of  12 variables:
+##  $ datetime  : Factor w/ 10886 levels "2011-01-01 00:00:00",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ season    : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ holiday   : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ workingday: int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ weather   : int  1 1 1 1 1 2 1 1 1 1 ...
+##  $ temp      : num  9.84 9.02 9.02 9.84 9.84 ...
+##  $ atemp     : num  14.4 13.6 13.6 14.4 14.4 ...
+##  $ humidity  : int  81 80 80 75 75 75 80 86 75 76 ...
+##  $ windspeed : num  0 0 0 0 0 ...
+##  $ casual    : int  3 8 5 3 0 0 2 1 1 8 ...
+##  $ registered: int  13 32 27 10 1 1 0 2 7 6 ...
+##  $ count     : int  16 40 32 13 1 1 2 3 8 14 ...
+\end{verbatim}
+
+\subparagraph{Factors}\label{factors}
+
+Since weather and season are factors we will want to change the data to
+as.factor
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bike}\OperatorTok{$}\NormalTok{season <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(bike}\OperatorTok{$}\NormalTok{season)}
+\NormalTok{bike}\OperatorTok{$}\NormalTok{weather <-}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(bike}\OperatorTok{$}\NormalTok{weather)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we will call structure aagin so we can verify the changes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(bike)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    10886 obs. of  12 variables:
+##  $ datetime  : Factor w/ 10886 levels "2011-01-01 00:00:00",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ season    : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ holiday   : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ workingday: int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ weather   : Factor w/ 4 levels "1","2","3","4": 1 1 1 1 1 2 1 1 1 1 ...
+##  $ temp      : num  9.84 9.02 9.02 9.84 9.84 ...
+##  $ atemp     : num  14.4 13.6 13.6 14.4 14.4 ...
+##  $ humidity  : int  81 80 80 75 75 75 80 86 75 76 ...
+##  $ windspeed : num  0 0 0 0 0 ...
+##  $ casual    : int  3 8 5 3 0 0 2 1 1 8 ...
+##  $ registered: int  13 32 27 10 1 1 0 2 7 6 ...
+##  $ count     : int  16 40 32 13 1 1 2 3 8 14 ...
+\end{verbatim}
+
+\subparagraph{Visualize the data}\label{visualize-the-data}
+
+count vs temp
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(bike, }\KeywordTok{aes}\NormalTok{(temp, count)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ temp), }\DataTypeTok{alpha =}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Temperature"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Number of bike rentals"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Rentals v Temp"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_clean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-7-1.pdf}
+In order to vizualize Need to turn datetime into POSIXct data field
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bike}\OperatorTok{$}\NormalTok{datetime <-}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{(bike}\OperatorTok{$}\NormalTok{datetime)}
+\end{Highlighting}
+\end{Shaded}
+
+count vs datetime
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(bike, }\KeywordTok{aes}\NormalTok{(datetime, count)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ temp)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_color_continuous}\NormalTok{(}\DataTypeTok{low =} \StringTok{"turquoise2"}\NormalTok{, }\DataTypeTok{high =} \StringTok{"orange"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Date"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Number of bike rentals"}\NormalTok{, }\DataTypeTok{title =} \StringTok{"Rentals vs Date"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_clean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-9-1.pdf}
+Coorelation between number of bikes rented and the temperature
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(bike[,}\KeywordTok{c}\NormalTok{(}\StringTok{"temp"}\NormalTok{,}\StringTok{"count"}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            temp     count
+## temp  1.0000000 0.3944536
+## count 0.3944536 1.0000000
+\end{verbatim}
+
+Expolore seasonality with a boxplot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(bike, }\KeywordTok{aes}\NormalTok{(season, count)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_boxplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ season)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_clean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-11-1.pdf}
+Add an hour column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bike}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(bike}\OperatorTok{$}\NormalTok{datetime, }\ControlFlowTok{function}\NormalTok{(x)\{}\KeywordTok{format}\NormalTok{(x,}\StringTok{"%H"}\NormalTok{)\})}
+\end{Highlighting}
+\end{Shaded}
+
+Segment data into weekday and weekend
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{workday <-}\StringTok{ }\NormalTok{bike }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(workingday }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\NormalTok{nonworkday <-}\StringTok{ }\NormalTok{bike }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{filter}\NormalTok{(workingday }\OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Visulaize weekday
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(workday, }\KeywordTok{aes}\NormalTok{(hour, count)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ temp), }\DataTypeTok{position =} \KeywordTok{position_jitter}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{, }\DataTypeTok{height =} \DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_color_gradientn}\NormalTok{(}\DataTypeTok{colours =} \KeywordTok{c}\NormalTok{(}\StringTok{'dark blue'}\NormalTok{,}\StringTok{'blue'}\NormalTok{,}\StringTok{'light blue'}\NormalTok{,}\StringTok{'light green'}\NormalTok{,}\StringTok{'yellow'}\NormalTok{,}\StringTok{'orange'}\NormalTok{,}\StringTok{'red'}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Weekday; Rentals by Hour"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_clean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{quote}
+Notice the peak in the morning before work and the evening after work?
+\end{quote}
+
+Visualize the weekend
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(nonworkday, }\KeywordTok{aes}\NormalTok{(hour, count)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ temp), }\DataTypeTok{position =} \KeywordTok{position_jitter}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{, }\DataTypeTok{height =} \DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_color_gradient2_tableau}\NormalTok{(}\DataTypeTok{palette =} \StringTok{"Red-Green Diverging"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Weekend; Rentals by Hour"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{theme_clean}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-15-1.pdf}
+\#\#\#\#\#Building the Model with just temperature as an attribute
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{temp.model <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ count }\OperatorTok{~}\StringTok{ }\NormalTok{temp, }\DataTypeTok{data =}\NormalTok{ bike )}
+\KeywordTok{summary}\NormalTok{(temp.model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = count ~ temp, data = bike)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -293.32 -112.36  -33.36   78.98  741.44 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)   6.0462     4.4394   1.362    0.173    
+## temp          9.1705     0.2048  44.783   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 166.5 on 10884 degrees of freedom
+## Multiple R-squared:  0.1556, Adjusted R-squared:  0.1555 
+## F-statistic:  2006 on 1 and 10884 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\subparagraph{Interpeting the Model}\label{interpeting-the-model}
+
+\begin{quote}
+Interpreting the intercept (β0): It is the value of y when x=0.Thus, it
+is the estimated number of rentals when the temperature is 0 degrees
+Celsius. Note: It does not always make sense to interpret the intercept.
+\end{quote}
+
+\begin{quote}
+Interpreting the ``temp'' coefficient (β1): It is the change in y
+divided by change in x, or the ``slope''. Thus, a temperature increase
+of 1 degree Celsius is associated with a rental increase of 9.17 bikes.
+This is not a statement of causation. β1 would be negative if an
+increase in temperature was associated with a decrease in rentals.
+\end{quote}
+
+\subparagraph{Predict the number of rentals if the temperature was 25
+degrees
+Celsius}\label{predict-the-number-of-rentals-if-the-temperature-was-25-degrees-celsius}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# y = mx + b}
+\FloatTok{9.17} \OperatorTok{*}\StringTok{ }\NormalTok{(}\DecValTok{25}\NormalTok{) }\OperatorTok{+}\StringTok{ }\FloatTok{6.0462}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 235.2962
+\end{verbatim}
+
+\subparagraph{Building the final model}\label{building-the-final-model}
+
+\begin{itemize}
+\tightlist
+\item
+  Attributes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    season
+  \item
+    holiday
+  \item
+    workingday
+  \item
+    weather
+  \item
+    temp
+  \item
+    humidity
+  \item
+    windspeed
+  \item
+    hour (factor)
+  \end{itemize}
+\end{itemize}
+
+Convert hour to a numeric value
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bike}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(bike}\OperatorTok{$}\NormalTok{hour, as.numeric)}
+\end{Highlighting}
+\end{Shaded}
+
+Model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model_bike <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(count }\OperatorTok{~}\StringTok{ }\NormalTok{. }\OperatorTok{-}\NormalTok{casual }\OperatorTok{-}\StringTok{ }\NormalTok{registered }\OperatorTok{-}\StringTok{ }\NormalTok{datetime }\OperatorTok{-}\StringTok{ }\NormalTok{atemp, bike)}
+\KeywordTok{summary}\NormalTok{(model_bike)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = count ~ . - casual - registered - datetime - atemp, 
+##     data = bike)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -342.22  -96.15  -31.35   54.23  673.28 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  30.05365    8.86641   3.390 0.000702 ***
+## season2      15.34914    5.15784   2.976 0.002928 ** 
+## season3     -12.80216    6.56666  -1.950 0.051253 .  
+## season4      66.85422    4.31557  15.491  < 2e-16 ***
+## holiday      -9.50871    8.71884  -1.091 0.275476    
+## workingday   -1.49264    3.11903  -0.479 0.632262    
+## weather2     10.12225    3.42440   2.956 0.003124 ** 
+## weather3    -29.62495    5.77708  -5.128 2.98e-07 ***
+## weather4    104.05163  146.62722   0.710 0.477946    
+## temp          9.16839    0.30887  29.684  < 2e-16 ***
+## humidity     -2.07404    0.09116 -22.752  < 2e-16 ***
+## windspeed     0.18471    0.18526   0.997 0.318769    
+## hour          7.41472    0.21733  34.117  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 146.5 on 10873 degrees of freedom
+## Multiple R-squared:  0.3463, Adjusted R-squared:  0.3456 
+## F-statistic:   480 on 12 and 10873 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
 
