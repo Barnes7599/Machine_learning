@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Linear Regression Model Project"
 author: "Jason Barnes"
 date: "5/21/2019"
 output: pdf_document
@@ -22,7 +22,7 @@ library(knitr)
 library(kableExtra)
 #devtools::install_github('yihui/tinytex')
 library(tinytex)
-
+library(rmarkdown)
 ```
 
 ####Data
@@ -35,7 +35,7 @@ bike <-  read.csv("Project/bikeshare.csv")
 ```{r}
 headbike <- head(bike)
 kable(headbike) %>% 
-    kable_styling()
+    kable_styling(bootstrap_options = "striped", full_width = FALSE)
 ```
 #####Check the structure of bike
 ```{r}
@@ -127,10 +127,10 @@ temp.model <- lm(formula = count ~ temp, data = bike )
 summary(temp.model)
 ```
 #####Interpeting the Model
->Interpreting the intercept (β0): It is the value of y when x=0.Thus, it is the estimated number of rentals when the temperature is 0 degrees Celsius. Note: It does not always make sense to interpret the intercept. 
+>Interpreting the intercept: It is the value of y when x=0.Thus, it is the estimated number of rentals when the temperature is 0 degrees Celsius. Note: It does not always make sense to interpret the intercept. 
 
 
->Interpreting the "temp" coefficient (β1): It is the change in y divided by change in x, or the "slope". Thus, a temperature increase of 1 degree Celsius is associated with a rental increase of 9.17 bikes. This is not a statement of causation. β1 would be negative if an increase in temperature was associated with a decrease in rentals.
+>Interpreting the "temp" coefficient: It is the change in y divided by change in x, or the "slope". Thus, a temperature increase of 1 degree Celsius is associated with a rental increase of 9.17 bikes. This is not a statement of causation. Coefficient would be negative if an increase in temperature was associated with a decrease in rentals.
 
 #####Predict the number of rentals if the temperature was 25 degrees Celsius
 ```{r}
