@@ -54,7 +54,8 @@ ggplotly(ggplot(workday, aes(hour, count)) +
 pl <- ggplot(nonworkday, aes(hour, count)) +
     geom_point(aes(color = temp), position = position_jitter(width = 1, height = 0), alpha = .5, size = 1.5) +
     scale_color_gradient2_tableau(palette = "Red-Green Diverging") +
-    labs(title = "Weekend; Rentals by Hour")
+    labs(title = "Weekend; Rentals by Hour") +
+    theme_classic()
 
 gpl <- ggplotly(pl)
 gpl
