@@ -24,6 +24,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
+            pdftitle={Untitled},
+            pdfauthor={Jason Barnes},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -112,14 +114,16 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
+  \title{Untitled}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Jason Barnes}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{5/21/2019}
+
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -136,6 +140,7 @@
 \usepackage{xcolor}
 
 \begin{document}
+\maketitle
 
 \subsection{Linear Regression Model}\label{linear-regression-model}
 

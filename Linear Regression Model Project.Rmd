@@ -1,8 +1,8 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
+title: "Untitled"
+author: "Jason Barnes"
+date: "5/21/2019"
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
