@@ -45,11 +45,11 @@ workday <- bike %>%
 nonworkday <- bike %>% 
     filter(workingday == 0)
 
-ggplot(workday, aes(hour, count)) +
-    geom_point(aes(color = temp), position = position_jitter(width = .5, height = 0), alpha = .5, size = 3) +
+ggplotly(ggplot(workday, aes(hour, count)) +
+    geom_point(aes(color = temp), position = position_jitter(width = .5, height = 0), alpha = .5, size = 2) +
     scale_color_gradientn(colours = c('dark blue','blue','light blue','light green','yellow','orange','red')) +
     labs(title = "Weekday; Rentals by Hour") +
-    theme_classic()
+    theme_classic())
 
 pl <- ggplot(nonworkday, aes(hour, count)) +
     geom_point(aes(color = temp), position = position_jitter(width = 1, height = 0), alpha = .5, size = 1.5) +
