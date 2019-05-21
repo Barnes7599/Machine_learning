@@ -68,6 +68,10 @@ summary(temp.model)
 # Based on the summary how many bike rentals would you have if the temp was 0 degrees Celsius (y = mx +b)
 
 9.17*25 + 6.0462
+# or you can use perdict function
+
+temp.test <- data.frame(temp = c(25))
+predict(temp.model, temp.test)
 
 bike$hour <- sapply(bike$hour, as.numeric)
 
