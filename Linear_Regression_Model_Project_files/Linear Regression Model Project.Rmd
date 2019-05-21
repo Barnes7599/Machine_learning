@@ -28,7 +28,7 @@ library(rmarkdown)
 ####Data
 Data can be downloaded at https://www.kaggle.com/c/bike-sharing-demand/data#
 ```{r}
-bike <-  read.csv("Project/bikeshare.csv")
+bike <-  read.csv("bikeshare.csv")
 ```
 
 ####Explore the data
