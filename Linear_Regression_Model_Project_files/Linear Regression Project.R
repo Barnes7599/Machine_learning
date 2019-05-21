@@ -1,6 +1,7 @@
 library(tidyverse)
 library(ggthemes)
 library(lubridate)
+library(plotly)
 #You are provided hourly rental data spanning two years. For this competition, the training set is comprised of the first 19 days of each month, while the test set is the 20th to the end of the month. You must predict the total count of bikes rented during each hour covered by the test set, using only information available prior to the rental period.
 
 bike <-  read.csv("bikeshare.csv")
@@ -45,14 +46,18 @@ nonworkday <- bike %>%
     filter(workingday == 0)
 
 ggplot(workday, aes(hour, count)) +
-    geom_point(aes(color = temp), position = position_jitter(width = 1, height = 0)) +
+    geom_point(aes(color = temp), position = position_jitter(width = .5, height = 0), alpha = .5, size = 3) +
     scale_color_gradientn(colours = c('dark blue','blue','light blue','light green','yellow','orange','red')) +
-    labs(title = "Weekday; Rentals by Hour")
+    labs(title = "Weekday; Rentals by Hour") +
+    theme_classic()
 
-ggplot(nonworkday, aes(hour, count)) +
-    geom_point(aes(color = temp), position = position_jitter(width = 1, height = 0)) +
+pl <- ggplot(nonworkday, aes(hour, count)) +
+    geom_point(aes(color = temp), position = position_jitter(width = 1, height = 0), alpha = .5, size = 1.5) +
     scale_color_gradient2_tableau(palette = "Red-Green Diverging") +
     labs(title = "Weekend; Rentals by Hour")
+
+gpl <- ggplotly(pl)
+gpl
 
 #building the model
 temp.model <- lm(formula = count ~ temp, data = bike )
