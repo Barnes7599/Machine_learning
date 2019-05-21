@@ -156,7 +156,7 @@ test set, using only information available prior to the rental period.
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------------------------------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages ------------------ tidyverse 1.2.1 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -167,7 +167,7 @@ test set, using only information available prior to the rental period.
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------------------------------------------------------ tidyverse_conflicts() --
+## -- Conflicts --------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -207,6 +207,13 @@ test set, using only information available prior to the rental period.
 ## 
 ##     group_rows
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#devtools::install_github('yihui/tinytex')}
+\KeywordTok{library}\NormalTok{(tinytex)}
+\end{Highlighting}
+\end{Shaded}
 
 \paragraph{Data}\label{data}
 
@@ -325,6 +332,7 @@ count vs temp
 \end{Shaded}
 
 \includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-7-1.pdf}
+
 In order to vizualize Need to turn datetime into POSIXct data field
 
 \begin{Shaded}
@@ -346,6 +354,7 @@ count vs datetime
 \end{Shaded}
 
 \includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-9-1.pdf}
+
 Coorelation between number of bikes rented and the temperature
 
 \begin{Shaded}
@@ -371,6 +380,7 @@ Expolore seasonality with a boxplot
 \end{Shaded}
 
 \includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-11-1.pdf}
+
 Add an hour column
 
 \begin{Shaded}
@@ -421,7 +431,9 @@ Visualize the weekend
 \end{Shaded}
 
 \includegraphics{Linear_Regression_Model_Project_files/figure-latex/unnamed-chunk-15-1.pdf}
-\#\#\#\#\#Building the Model with just temperature as an attribute
+
+\subparagraph{Building the Model with just temperature as an
+attribute}\label{building-the-model-with-just-temperature-as-an-attribute}
 
 \begin{Shaded}
 \begin{Highlighting}[]
