@@ -1,5 +1,6 @@
 ---
 title: "Linear Regression"
+output: pdf_document
 date: "5/18/2019"
 ---
 ###Pull in the data set
